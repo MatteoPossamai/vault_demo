@@ -27,6 +27,21 @@ done
 
 # Configure LDAP
 vault auth enable ldap
+
+vault write auth/ldap/config \
+    url="ldap://ldap.bbl-internal.com:389" \
+    userdn="BBL\\%s" \
+    userattr="sAMAccountName" \
+    discoverdn=false \
+    insecure_tls=true \
+    starttls=false \
+    groupfilter="(memberOf=%s)" \
+    groupdn="dc=bbl-internal,dc=com" \
+    groupattr="memberOf" \
+    binddn="" \
+    bindpass="" \
+    userfilter="(sAMAccountName=%s)"
+
 vault write auth/ldap/groups/devops policies=devops
 vault write auth/ldap/groups/quicks policies=quicks
 
