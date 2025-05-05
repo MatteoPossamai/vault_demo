@@ -1,7 +1,8 @@
 ui = true
 disable_mlock = "true"
 
-storage "file" {
+storage "raft" {
+  node_id = "vault-${hostname}"
   path    = "/vault/data"
 }
 
